@@ -1,5 +1,4 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { runPipeline } from "../backend/dist/orchestrator.js";
 
 export default async function handler(
   req: VercelRequest,
@@ -18,6 +17,7 @@ export default async function handler(
   }
 
   try {
+    const { runPipeline } = await import("../backend/dist/orchestrator.js");
     const result = await runPipeline(stock.trim());
     res.status(200).json(result);
   } catch (err) {
