@@ -118,7 +118,7 @@ function getClient(): GoogleGenAI {
 export async function getSectorAndCompetitors(stockInput: string): Promise<SectorCompetitors> {
   const ai = getClient();
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-2.5-flash",
     contents: `${SECTOR_COMPETITORS_SYSTEM}\n\nStock or company: ${stockInput}`,
     config: {
       responseMimeType: "application/json",
@@ -141,7 +141,7 @@ export async function analyzeSentiment(
   const prompt = `${SENTIMENT_ANALYSIS_SYSTEM}\n\nCompany: ${companyName}\n\nNews data:\n${JSON.stringify(newsJson, null, 2)}`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-2.5-flash",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
